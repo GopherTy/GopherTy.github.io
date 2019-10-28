@@ -8,7 +8,9 @@ date: 2019-09-30 14:06:42
 coverImg:
 password:
 summary: 关于 Shell 中较为常用且重要的命令
-tags: Shell基本命令
+tags: 
+    - Shell基本命令 
+    - Linux
 categories: Linux
 reprintPolicy:
 ---
