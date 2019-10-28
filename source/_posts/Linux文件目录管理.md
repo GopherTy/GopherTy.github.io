@@ -7,10 +7,10 @@ toc: true
 date: 2019-10-01 22:19:23
 coverImg:
 password:
-summary: Linux 文件目录管理常用命令
+summary: 
 tags: 
-    - Shell目录管理命令　
-    - Linux　
+    - Shell目录管理命令
+    - Linux
 categories: Linux 
 reprintPolicy:
 ---
