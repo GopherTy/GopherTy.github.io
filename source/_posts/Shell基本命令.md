@@ -1,7 +1,7 @@
 ---
 title: Shell基本命令
 author: GopherTy
-top: true
+top: false
 cover: false
 toc: true
 date: 2019-09-30 14:06:42
