@@ -5,8 +5,8 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Go语言知识点记录, GopherTyBlog">
-    <meta name="description" content="Go 语言知识点记录sync包的Once结构sync 是 Golang 标准库中的同步包，Once 结构中的 Do 方法能够保证传入的参数 f 只执行一次,并且在 Do 返回时  f 已经执行完成。它的源码如下：
-// Once is an">
+    <meta name="description" content="Go 语言知识点记录sync包sync 是 Golang 标准库中的同步包，Once 结构中的 Do 方法能够保证传入的参数 f 只执行一次,并且在 Do 返回时  f 已经执行完成。它的源码如下：
+// Once is an object">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -410,14 +410,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.4k
+                        1.5k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        6 分
+                        7 分
                     </div>
                     
                 
@@ -433,7 +433,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Go-语言知识点记录"><a href="#Go-语言知识点记录" class="headerlink" title="Go 语言知识点记录"></a>Go 语言知识点记录</h1><h2 id="sync包的Once结构"><a href="#sync包的Once结构" class="headerlink" title="sync包的Once结构"></a>sync包的Once结构</h2><p>sync 是 Golang 标准库中的同步包，<code>Once</code> 结构中的 <code>Do</code> 方法能够保证传入的参数 <code>f</code> 只执行一次,并且在 Do 返回时  f 已经执行完成。它的源码如下：</p>
+                <h1 id="Go-语言知识点记录"><a href="#Go-语言知识点记录" class="headerlink" title="Go 语言知识点记录"></a>Go 语言知识点记录</h1><h2 id="sync包"><a href="#sync包" class="headerlink" title="sync包"></a>sync包</h2><p>sync 是 Golang 标准库中的同步包，<code>Once</code> 结构中的 <code>Do</code> 方法能够保证传入的参数 <code>f</code> 只执行一次,并且在 Do 返回时  f 已经执行完成。它的源码如下：</p>
 <pre class="line-numbers language-go"><code class="language-go"><span class="token comment" spellcheck="true">// Once is an object that will perform exactly one action.</span>
 <span class="token keyword">type</span> Once <span class="token keyword">struct</span> <span class="token punctuation">{</span>
     m    Mutex
@@ -505,6 +505,55 @@
     config <span class="token operator">:=</span> <span class="token function">NewConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>sync.WaitGroup 使用来等待协程完成的同步结构，它在第一次被使用后不能被拷贝，也就是说不能传递该结构。</p>
+<pre class="line-numbers language-go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">"fmt"</span>
+    <span class="token string">"io/ioutil"</span>
+    <span class="token string">"log"</span>
+    <span class="token string">"net/http"</span>
+    <span class="token string">"sync"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    urls <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">{</span>
+        <span class="token string">"http://www.reddit.com/r/aww.json"</span><span class="token punctuation">,</span>
+        <span class="token string">"http://www.reddit.com/r/funny.json"</span><span class="token punctuation">,</span>
+        <span class="token string">"http://www.reddit.com/r/programming.json"</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+    jsonResponses <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token builtin">string</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">var</span> wg sync<span class="token punctuation">.</span>WaitGroup
+
+    wg<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token function">len</span><span class="token punctuation">(</span>urls<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> url <span class="token operator">:=</span> <span class="token keyword">range</span> urls <span class="token punctuation">{</span>
+        <span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span>url <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">defer</span> wg<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            res<span class="token punctuation">,</span> err <span class="token operator">:=</span> http<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+                log<span class="token punctuation">.</span><span class="token function">Fatal</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                <span class="token keyword">defer</span> res<span class="token punctuation">.</span>Body<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                body<span class="token punctuation">,</span> err <span class="token operator">:=</span> ioutil<span class="token punctuation">.</span><span class="token function">ReadAll</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span>Body<span class="token punctuation">)</span>
+                <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+                    log<span class="token punctuation">.</span><span class="token function">Fatal</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+                <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                    jsonResponses <span class="token operator">&lt;-</span> <span class="token function">string</span><span class="token punctuation">(</span>body<span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> response <span class="token operator">:=</span> <span class="token keyword">range</span> jsonResponses <span class="token punctuation">{</span>
+            fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    wg<span class="token punctuation">.</span><span class="token function">Wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="Go-编译过程"><a href="#Go-编译过程" class="headerlink" title="Go 编译过程"></a>Go 编译过程</h2><p>Go 语言程序运行之前需要先编译成二进制，在编译过程会生成中间代码。它具有静态单赋值（Static Single Assignment）的特性。</p>
 <p>抽象语法树（abstract syntax tree）是源代码语法的结构的一种抽象表示。编译器在执行完语法分析之后会输出一个抽象语法树，这个抽象语法树会辅助编译器进行语义分析。</p>
 <p>如果一个中间代码具有静态单赋值的特性，那么每个变量就只会被赋值一次。静态单赋值主要是对代码进行优化。</p>
@@ -845,16 +894,16 @@ let decimal:
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/学习笔记/" target="_blank">
-                        <span class="chip bg-color">学习笔记</span>
-                    </a>
-                    
                     <a href="/tags/脚本语言/" target="_blank">
                         <span class="chip bg-color">脚本语言</span>
                     </a>
                     
                     <a href="/tags/script/" target="_blank">
                         <span class="chip bg-color">script</span>
+                    </a>
+                    
+                    <a href="/tags/学习笔记/" target="_blank">
+                        <span class="chip bg-color">学习笔记</span>
                     </a>
                     
                     <a href="/tags/typescript/" target="_blank">
@@ -1073,7 +1122,7 @@ d
 
             
             &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-            <span class="white-color">39.6k</span>
+            <span class="white-color">42.2k</span>
             
 
             <br />

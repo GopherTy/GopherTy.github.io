@@ -413,7 +413,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        503
+                        592
                     </div>
                     
 
@@ -459,6 +459,7 @@
 <h3 id="VSCode"><a href="#VSCode" class="headerlink" title="VSCode"></a>VSCode</h3><p>安装 <a href="https://code.visualstudio.com/Download" target="_blank" rel="noopener">VSCode</a> 。</p>
 <p>配置 Go 安装环境：</p>
 <p>修改 ~/.profile 或 ~/.bashrc 文件 ，<a href="https://serverfault.com/questions/261802/what-are-the-functional-differences-between-profile-bash-profile-and-bashrc" target="_blank" rel="noopener">它们之间的区别</a>。</p>
+<p><code>~/.profile</code> 是用来配置环境变量的与系统有关，而 <code>~/.bashrc</code> 是跟特定的 shell 相关。</p>
 <pre class="line-numbers language-shell"><code class="language-shell">export GOROOT="path"
 export GOPATH="path1:path2"
 export PATH=$PATH:$GOROOT:$GOPATH<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
@@ -467,8 +468,13 @@ export PATH=$PATH:$GOROOT:$GOPATH<span aria-hidden="true" class="line-numbers-ro
 </blockquote>
 <p>下载 VScode 中的插件只需要配置 GOPROXY 就可以了 </p>
 <p><code>go env -w GOPROXY=https://goproxy.io,direct</code></p>
-<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><p>解压 zip 档案：unzip  file.zip  -d  [directory name]</p>
-<p>ssh 公钥私钥<a href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh" target="_blank" rel="noopener">生成</a>。</p>
+<h3 id="Goland"><a href="#Goland" class="headerlink" title="Goland"></a>Goland</h3><h4 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h4><p>查找 Ctrl + F</p>
+<p>替换 Ctrl + R </p>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><h4 id="解压打包"><a href="#解压打包" class="headerlink" title="解压打包"></a>解压打包</h4><p>解压 zip 档案：unzip  file.zip  -d  [directory name]<br>解压 rpm 档案：rpm2cpio FileName.rpm | cpio -div [先要安装 rpm2cpio]</p>
+<h4 id="输入法"><a href="#输入法" class="headerlink" title="输入法"></a>输入法</h4><p>在 mint 下简繁体的切换： Ctrl + Shift + F </p>
+<p>切换其他输入法：Ctrl + Shift</p>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p>ssh 公钥私钥<a href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh" target="_blank" rel="noopener">生成</a>。</p>
+<p>TTL time to live</p>
 
             </div>
             <hr/>
@@ -652,52 +658,52 @@ export PATH=$PATH:$GOROOT:$GOPATH<span aria-hidden="true" class="line-numbers-ro
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6 overflow-policy" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6 overflow-policy" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
-            </div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/03/28/mint/">
+                <a href="/2021/03/30/go-bian-ma-gui-fan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="mint">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Go编码规范">
                         
-                        <span class="card-title">mint</span>
+                        <span class="card-title">Go编码规范</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Mint 操作系统笔记分区硬盘分为 IDE 银盘，SCSI 硬盘和 SATA 硬盘。在 Linux 中 IDE 接口被称为 hd ，SCSI 和 SATA 被称为 sd（常用为 sd）。第一块硬盘被称为 sda ，第二块硬盘被称为 sdb 
+                            Go 编码规范Gofmt使用工具统一代码风格，目前默认使用 goimports 。vscode 中配置即可
+Comment Sentences注释文档应该是完整的句子, 并且要以名字作为开始，注释结束。
+// Request represe
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2021-03-28
-                            </span>
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2021-03-30
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/操作系统/" class="post-category" target="_blank">
-                                    操作系统
+                            <a href="/categories/编程语言/" class="post-category" target="_blank">
+                                    编程语言
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Linux/" target="_blank">
-                        <span class="chip bg-color">Linux</span>
+                    <a href="/tags/Go/" target="_blank">
+                        <span class="chip bg-color">Go</span>
                     </a>
                     
-                    <a href="/tags/Mint/" target="_blank">
-                        <span class="chip bg-color">Mint</span>
+                    <a href="/tags/编码规范/" target="_blank">
+                        <span class="chip bg-color">编码规范</span>
                     </a>
                     
                 </div>
@@ -910,7 +916,7 @@ kub
 
             
             &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-            <span class="white-color">39.6k</span>
+            <span class="white-color">42.2k</span>
             
 
             <br />

@@ -5,8 +5,13 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="数据库学习笔记, GopherTyBlog">
-    <meta name="description" content="数据库学习笔记MySQL基础知识Order by 按多个字段排序当 SELECT 结果按多个字段排序时，先对第一个字段排序后,再在第一次排序的结果之上排序第二个字段,第一个字段的顺序不会改变。
-WHERE 子句WHERE 子句中可以使用 A">
+    <meta name="description" content="数据库学习笔记MySQL基础知识SELECT语法结构
+SELECT select_list
+FROM table_name;
+注意事项
+
+SQL 语法不区分大小写，但为了格式化和强调性关键字最好大写。
+FROM 关键字最好另起一行，为了更好">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -414,14 +419,14 @@ WHERE 子句WHERE 子句中可以使用 A">
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.1k
+                        2.2k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        4 分
+                        9 分
                     </div>
                     
                 
@@ -437,12 +442,64 @@ WHERE 子句WHERE 子句中可以使用 A">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="数据库学习笔记"><a href="#数据库学习笔记" class="headerlink" title="数据库学习笔记"></a>数据库学习笔记</h1><h2 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h2><h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><h4 id="Order-by-按多个字段排序"><a href="#Order-by-按多个字段排序" class="headerlink" title="Order by 按多个字段排序"></a>Order by 按多个字段排序</h4><p>当 <code>SELECT</code> 结果按多个字段排序时，先对第一个字段排序后,再在第一次排序的结果之上排序第二个字段,第一个字段的顺序不会改变。</p>
-<h4 id="WHERE-子句"><a href="#WHERE-子句" class="headerlink" title="WHERE 子句"></a>WHERE 子句</h4><p>WHERE 子句中可以使用 <code>AND</code> <code>OR</code> <code>BETWEEN...AND...</code> <code>LIKE</code> <code>IN</code> <code>IS NULL</code>  操作符。 </p>
+                <h1 id="数据库学习笔记"><a href="#数据库学习笔记" class="headerlink" title="数据库学习笔记"></a>数据库学习笔记</h1><h2 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h2><h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><h4 id="SELECT"><a href="#SELECT" class="headerlink" title="SELECT"></a>SELECT</h4><p>语法结构</p>
+<pre class="line-numbers language-SQL"><code class="language-SQL">SELECT select_list
+FROM table_name;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>注意事项</p>
+<ul>
+<li><code>SQL</code> 语法不区分大小写，但为了格式化和强调性关键字最好大写。</li>
+<li><code>FROM</code> 关键字最好另起一行，为了更好阅读和管理。</li>
+<li>在程序端写查询语句时，最好指定要查询的列。<a href="https://www.mysqltutorial.org/mysql-select-statement-query-data.aspx" target="_blank" rel="noopener">说明</a></li>
+</ul>
+<h4 id="ORDER-BY"><a href="#ORDER-BY" class="headerlink" title="ORDER BY"></a>ORDER BY</h4><p>语法结构</p>
+<pre class="line-numbers language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
+   select_list
+<span class="token keyword">FROM</span> 
+   table_name
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> 
+   column1 <span class="token punctuation">[</span><span class="token keyword">ASC</span><span class="token operator">|</span><span class="token keyword">DESC</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
+   column2 <span class="token punctuation">[</span><span class="token keyword">ASC</span><span class="token operator">|</span><span class="token keyword">DESC</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+   <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>说明</p>
+<ul>
+<li><code>ASC</code> 代表升序，<code>DESC</code> 代表降序。</li>
+<li>当未指定列的排序时，默认为升序排列</li>
+</ul>
+<p>注意事项</p>
+<ul>
+<li>当 <code>SELECT</code> 结果按多个字段排序时，先对第一个字段排序后,再在第一次排序的结果之上排序第二个字段,第一个字段的顺序不会改变。</li>
+<li><code>ORDER BY</code> 在 <code>SELECT</code> 子句之后进行评估，所以可以使用 <code>SELECT</code> 子句中指定的别名。</li>
+</ul>
+<h4 id="WHERE"><a href="#WHERE" class="headerlink" title="WHERE"></a>WHERE</h4><p>语法结构</p>
+<pre class="line-numbers language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
+    select_list
+<span class="token keyword">FROM</span>
+    table_name
+<span class="token keyword">WHERE</span>
+    search_condition<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>注意事项</p>
+<ul>
+<li><code>WHERE</code> 子句可以用在 <code>UPDATE</code> , <code>DELETE</code> 语句中。</li>
+<li><code>WHERE</code> 的评估顺序在 <code>FROM</code> 子句之后 <code>SELECT</code> 子句之前。</li>
+<li><code>OR</code> 只要满足第一个条件后，不会在判断第二个条件。</li>
+<li>检查值为 <code>NULL</code> ,使用 <code>WHERE value IS NULL</code> 并不是 <code>=</code> 。</li>
+</ul>
+<p><code>WHERE</code> 子句中可以使用 <code>AND</code> <code>OR</code> <code>BETWEEN...AND...</code> <code>LIKE</code> <code>IN</code> <code>IS NULL</code>  等操作符。 </p>
 <ul>
 <li><code>LIKE</code> 使用 <code>%</code> 匹配任意字符或<code>_</code> 一个字符。</li>
 <li><code>&lt;&gt;</code> 和 <code>!=</code> 等效，都表示不等于。</li>
 <li><code>NULL</code> 在数据库中表示数据缺失或未知，和空字符串或 0 不等效。</li>
+</ul>
+<h4 id="SELECT-DISTINCT"><a href="#SELECT-DISTINCT" class="headerlink" title="SELECT DISTINCT"></a>SELECT DISTINCT</h4><p>语法结构</p>
+<pre class="line-numbers language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token keyword">DISTINCT</span>
+    select_list
+<span class="token keyword">FROM</span>
+    table_name<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>注意事项</p>
+<ul>
+<li>使用 DISTINCT 子句时，MySQL 对待 NULL 都是一个值。</li>
+<li>DISTINCT 作用多个列时，会联合查询的内容进行去从。</li>
+<li>当没有使用联合函数时，使用 <code>GROUP BY</code> 和 <code>DISTINCT</code>  子句的效果相同。不同在于 <code>GROUP BY</code> 会排序结果集，但是在版本 8.0 及之后没有显示排序 <code>GROUP BY</code> 子句的结果集时，也是未排序的。</li>
 </ul>
 <h4 id="子句执行顺序"><a href="#子句执行顺序" class="headerlink" title="子句执行顺序"></a>子句执行顺序</h4><p><code>FROM</code> -&gt;  <code>WHERE</code> -&gt; <code>SELECT</code>-&gt; <code>GROUP BY</code> -&gt; <code>HAVING</code> -&gt; <code>ORDER BY</code> -&gt; <code>LIMIT</code></p>
 <h4 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h4><ul>
@@ -512,6 +569,250 @@ WHERE 子句WHERE 子句中可以使用 A">
 <h4 id="删除索引"><a href="#删除索引" class="headerlink" title="删除索引"></a>删除索引</h4><pre class="line-numbers language-sql"><code class="language-sql"><span class="token keyword">DROP</span> <span class="token keyword">INDEX</span> index_name <span class="token keyword">ON</span> table_name
 <span class="token punctuation">[</span>algorithm_option <span class="token operator">|</span> lock_option<span class="token punctuation">]</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><code>algorithm_option</code> 表示删除算法有 <code>ALGORITHM [=] {DEFAULT|INPLACE|COPY}</code> 三种，MySQL 默认使用 <code>INPLACE</code> 也就是重建一个新表，<code>COPY</code> 是在表将逐行复制到新表中，然后在原始表的副本上执行DROP INDEX。 不允许并发数据操作语句，例如INSERT和UPDATE。</p>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p><img src="https://www.mysqltutorial.org/wp-content/uploads/0211/03/MySQL-Data-Types.jpg" alt="MySQL数据类型"></p>
+<p>MySQL中的数值类型</p>
+<table>
+<thead>
+<tr>
+<th align="left">Numeric Types</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.mysqltutorial.org/mysql-int/" target="_blank" rel="noopener"><code>TINYINT</code></a></td>
+<td align="left">A very small integer</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.mysqltutorial.org/mysql-int/" target="_blank" rel="noopener"><code>SMALLINT</code></a></td>
+<td align="left">A small integer</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.mysqltutorial.org/mysql-int/" target="_blank" rel="noopener"><code>MEDIUMINT</code></a></td>
+<td align="left">A medium-sized integer</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.mysqltutorial.org/mysql-int/" target="_blank" rel="noopener"><code>INT</code></a></td>
+<td align="left">A standard integer</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.mysqltutorial.org/mysql-int/" target="_blank" rel="noopener"><code>BIGINT</code></a></td>
+<td align="left">A large integer</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.mysqltutorial.org/mysql-decimal/" target="_blank" rel="noopener"><code>DECIMAL</code></a></td>
+<td align="left">A fixed-point number</td>
+</tr>
+<tr>
+<td align="left"><code>FLOAT</code></td>
+<td align="left">A single-precision floating point number</td>
+</tr>
+<tr>
+<td align="left"><code>DOUBLE</code></td>
+<td align="left">A double-precision floating point number</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.mysqltutorial.org/mysql-bit/" target="_blank" rel="noopener"><code>BIT</code></a></td>
+<td align="left">A bit field</td>
+</tr>
+</tbody></table>
+<p>MySQL中的布尔类型</p>
+<ul>
+<li>在 MySQL 中没有布尔类型而使用最小整数类型 TINYINT(1) 来代替</li>
+</ul>
+<p>MySQL中的字符串类型</p>
+<ul>
+<li>string 可以保存任意内容，从纯文本到二进制数据。如图片，文件。</li>
+<li>字符串还可以基于使用 LIKE 操作符，正则表达式，全文搜索的比较和搜索。</li>
+<li>二进制字符串就是字节序列</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><a href="https://www.mysqltutorial.org/mysql-char-data-type/" target="_blank" rel="noopener"><code>CHAR</code></a></th>
+<th>A fixed-length nonbinary (character) string</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://www.mysqltutorial.org/mysql-varchar/" target="_blank" rel="noopener"><code>VARCHAR</code></a></td>
+<td>A variable-length non-binary string</td>
+</tr>
+<tr>
+<td><code>BINARY</code></td>
+<td>A fixed-length binary string</td>
+</tr>
+<tr>
+<td><code>VARBINARY</code></td>
+<td>A variable-length binary string</td>
+</tr>
+<tr>
+<td><code>TINYBLOB</code></td>
+<td>A very small BLOB (binary large object)</td>
+</tr>
+<tr>
+<td><code>BLOB</code></td>
+<td>A small BLOB</td>
+</tr>
+<tr>
+<td><code>MEDIUMBLOB</code></td>
+<td>A medium-sized BLOB</td>
+</tr>
+<tr>
+<td><code>LONGBLOB</code></td>
+<td>A large BLOB</td>
+</tr>
+<tr>
+<td><a href="https://www.mysqltutorial.org/mysql-text/" target="_blank" rel="noopener"><code>TINYTEXT</code></a></td>
+<td>A very small non-binary string</td>
+</tr>
+<tr>
+<td><a href="https://www.mysqltutorial.org/mysql-text/" target="_blank" rel="noopener"><code>TEXT</code></a></td>
+<td>A small non-binary string</td>
+</tr>
+<tr>
+<td><a href="https://www.mysqltutorial.org/mysql-text/" target="_blank" rel="noopener"><code>MEDIUMTEXT</code></a></td>
+<td>A medium-sized non-binary string</td>
+</tr>
+<tr>
+<td><a href="https://www.mysqltutorial.org/mysql-text/" target="_blank" rel="noopener"><code>LONGTEXT</code></a></td>
+<td>A large non-binary string</td>
+</tr>
+<tr>
+<td><a href="https://www.mysqltutorial.org/mysql-enum/" target="_blank" rel="noopener"><code>ENUM</code></a></td>
+<td>An enumeration; each column value may be assigned one enumeration member</td>
+</tr>
+<tr>
+<td><code>SET</code></td>
+<td>A set; each column value may be assigned zero or more <code>SET</code> members</td>
+</tr>
+</tbody></table>
+<p>MySQL中的日期和时间类型</p>
+<table>
+<thead>
+<tr>
+<th align="left">Date and Time Types</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.mysqltutorial.org/mysql-date/" target="_blank" rel="noopener"><code>DATE</code></a></td>
+<td align="left">A date value in <code>CCYY-MM-DD</code> format</td>
+</tr>
+<tr>
+<td align="left"><code>TIME</code></td>
+<td align="left">A time value in <code>hh:mm:ss</code> format</td>
+</tr>
+<tr>
+<td align="left"><code>DATETIME</code></td>
+<td align="left">A date and time value in<code>CCYY-MM-DD hh:mm:ss</code>format</td>
+</tr>
+<tr>
+<td align="left"><code>TIMESTAMP</code></td>
+<td align="left">A timestamp value in <code>CCYY-MM-DD hh:mm:ss</code> format</td>
+</tr>
+<tr>
+<td align="left"><code>YEAR</code></td>
+<td align="left">A year value in <code>CCYY</code> or <code>YY</code>format</td>
+</tr>
+</tbody></table>
+<ul>
+<li>timestamp 数据类型是用来追踪每行数据改变时间</li>
+</ul>
+<p>MySQL中的空间数据类型（了解）</p>
+<table>
+<thead>
+<tr>
+<th align="left">Spatial Data Types</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>GEOMETRY</code></td>
+<td align="left">A spatial value of any type</td>
+</tr>
+<tr>
+<td align="left"><code>POINT</code></td>
+<td align="left">A point (a pair of X-Y coordinates)</td>
+</tr>
+<tr>
+<td align="left"><code>LINESTRING</code></td>
+<td align="left">A curve (one or more <code>POINT</code>values)</td>
+</tr>
+<tr>
+<td align="left"><code>POLYGON</code></td>
+<td align="left">A polygon</td>
+</tr>
+<tr>
+<td align="left"><code>GEOMETRYCOLLECTION</code></td>
+<td align="left">A collection of <code>GEOMETRY</code>values</td>
+</tr>
+<tr>
+<td align="left"><code>MULTILINESTRING</code></td>
+<td align="left">A collection of <code>LINESTRING</code>values</td>
+</tr>
+<tr>
+<td align="left"><code>MULTIPOINT</code></td>
+<td align="left">A collection of <code>POINT</code>values</td>
+</tr>
+<tr>
+<td align="left"><code>MULTIPOLYGON</code></td>
+<td align="left">A collection of <code>POLYGON</code>values</td>
+</tr>
+</tbody></table>
+<p>JSON 数据类型</p>
+<p>从版本 5.7.8 开始，加入了 <a href="https://www.mysqltutorial.org/mysql-json/" target="_blank" rel="noopener">JSON</a> 类型。</p>
+<h3 id="创建数据表"><a href="#创建数据表" class="headerlink" title="创建数据表"></a>创建数据表</h3><h4 id="建表语法"><a href="#建表语法" class="headerlink" title="建表语法"></a>建表语法</h4><pre class="line-numbers language-sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> <span class="token punctuation">[</span><span class="token keyword">IF</span> <span class="token operator">NOT</span> <span class="token keyword">EXISTS</span><span class="token punctuation">]</span> table_name<span class="token punctuation">(</span>
+   column_1_definition<span class="token punctuation">,</span>
+   column_2_definition<span class="token punctuation">,</span>
+   <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span>
+   table_constraints
+<span class="token punctuation">)</span> <span class="token keyword">ENGINE</span><span class="token operator">=</span>storage_engine<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>说明：</p>
+<ul>
+<li>表名在数据库中必须唯一</li>
+<li>表列名通过逗号分割</li>
+<li>存储引擎是可选的，默认为 InnoDB 。（从 MySQL 5.5 版本及之后。特性：ACID transaction，referential integrity, and crash recovery 等 ）</li>
+</ul>
+<p>数据列语法</p>
+<pre class="line-numbers language-sql"><code class="language-sql">column_name data_type<span class="token punctuation">(</span>length<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">]</span> <span class="token punctuation">[</span><span class="token keyword">DEFAULT</span> <span class="token keyword">value</span><span class="token punctuation">]</span> <span class="token punctuation">[</span><span class="token keyword">AUTO_INCREMENT</span><span class="token punctuation">]</span> column_constraint<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>每个列名都有特定的数据类型和大小。如 VARCHAR(255)</li>
+<li>NOT NULL 约束限制该列不能为 NULL ，除此之外还有 CHECK 和 UNIQUE 约束。</li>
+<li>DEFAULT 为列指定默认值</li>
+<li>AUTO_INCREMENT 当插入一行时，该字段标记的会自动增长，并且每个表只有一个该字段，一般是主键。</li>
+</ul>
+<p>除了数据列约束之外还可以包含表约束如：UNIQUE，CHECK，PRIMARY KEY，FOREIGN KEY。</p>
+<pre class="line-numbers language-sql"><code class="language-sql"><span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span> <span class="token punctuation">(</span>col1<span class="token punctuation">,</span>col2<span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>建表语句示例：</p>
+<pre class="line-numbers language-sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token operator">NOT</span> <span class="token keyword">EXISTS</span> tasks <span class="token punctuation">(</span>
+    task_id <span class="token keyword">INT</span> <span class="token keyword">AUTO_INCREMENT</span> <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span><span class="token punctuation">,</span>
+    title <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
+    start_date <span class="token keyword">DATE</span><span class="token punctuation">,</span>
+    due_date <span class="token keyword">DATE</span><span class="token punctuation">,</span>
+    <span class="token keyword">status</span> <span class="token keyword">TINYINT</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
+    priority <span class="token keyword">TINYINT</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
+    description <span class="token keyword">TEXT</span><span class="token punctuation">,</span>
+    created_at <span class="token keyword">TIMESTAMP</span> <span class="token keyword">DEFAULT</span> <span class="token keyword">CURRENT_TIMESTAMP</span>
+<span class="token punctuation">)</span>  <span class="token keyword">ENGINE</span><span class="token operator">=</span><span class="token keyword">INNODB</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>建表成功后可以使用 <code>DESCRIBE table_name;</code> 查看表结构</p>
+<p>创建拥有外键的数据表：</p>
+<pre class="line-numbers language-sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token operator">NOT</span> <span class="token keyword">EXISTS</span> checklists <span class="token punctuation">(</span>
+    todo_id <span class="token keyword">INT</span> <span class="token keyword">AUTO_INCREMENT</span><span class="token punctuation">,</span>
+    task_id <span class="token keyword">INT</span><span class="token punctuation">,</span>
+    todo <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
+    is_completed <span class="token keyword">BOOLEAN</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword">DEFAULT</span> <span class="token boolean">FALSE</span><span class="token punctuation">,</span>
+    <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span> <span class="token punctuation">(</span>todo_id <span class="token punctuation">,</span> task_id<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token keyword">FOREIGN</span> <span class="token keyword">KEY</span> <span class="token punctuation">(</span>task_id<span class="token punctuation">)</span>
+        <span class="token keyword">REFERENCES</span> tasks <span class="token punctuation">(</span>task_id<span class="token punctuation">)</span>
+        <span class="token keyword">ON</span> <span class="token keyword">UPDATE</span> <span class="token keyword">RESTRICT</span> <span class="token keyword">ON</span> <span class="token keyword">DELETE</span> <span class="token keyword">CASCADE</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>两张表之间的关系：</p>
+<p><img src="https://www.mysqltutorial.org/wp-content/uploads/2019/08/MySQL-CREATE-TABLE-checklists-table.png" alt></p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="COUNT"><a href="#COUNT" class="headerlink" title="COUNT"></a>COUNT</h4><p>它为集合函数，存在三种形式：COUNT(*), COUNT(expression), COUNT(DISTINCT expression)</p>
+<ul>
+<li>COUNT(*) 返回 SELECT 查询到的结果集数量，包括重复，不为空和空的行</li>
+<li>COUNT(expression) 返回不为空的结果集数量</li>
+<li>COUNT(DISTINCT expression) 返回不为空且不重复的结果集数量 </li>
+</ul>
 
             </div>
             <hr/>
@@ -952,7 +1253,7 @@ WHERE 子句WHERE 子句中可以使用 A">
 
             
             &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-            <span class="white-color">39.6k</span>
+            <span class="white-color">42.2k</span>
             
 
             <br />

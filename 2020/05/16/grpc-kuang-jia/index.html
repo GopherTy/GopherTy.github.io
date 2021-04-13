@@ -570,13 +570,13 @@ gRPCgRPC 架构为 C">
   rpc <span class="token function">Search</span> <span class="token punctuation">(</span>SearchRequest<span class="token punctuation">)</span> <span class="token function">returns</span> <span class="token punctuation">(</span>SearchResponse<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <h4 id="生成代码"><a href="#生成代码" class="headerlink" title="生成代码"></a>生成代码</h4><p>生成对应语言的代码参考<a href="https://developers.google.com/protocol-buffers/docs/reference/overview" target="_blank" rel="noopener">官网</a></p>
-<p>安装 protoc 编译器</p>
+<p>安装 protoc 编译器[ 手动下载解压至安装目录并加入到环境变量 ]</p>
 <blockquote>
 <p>地址：<a href="https://github.com/protocolbuffers/protobuf/releases" target="_blank" rel="noopener">https://github.com/protocolbuffers/protobuf/releases</a></p>
 </blockquote>
 <h5 id="安装-go-插件"><a href="#安装-go-插件" class="headerlink" title="安装 go 插件"></a>安装 go 插件</h5><p><code>go install google.golang.org/protobuf/cmd/protoc-gen-go</code> </p>
 <blockquote>
-<p>注意：官网推荐使用上面的插件。</p>
+<p>注意：官网推荐使用上面的插件，对于 go-zero 项目生成 grpc 代码是老版本 v1.4.x 。</p>
 </blockquote>
 <h5 id="编译-go-文件"><a href="#编译-go-文件" class="headerlink" title="编译 go 文件"></a>编译 go 文件</h5><p><code>protoc -I=$SRC_DIR --go_out=$DST_DIR   $SRC_DIR/addressbook.proto</code></p>
 <p><code>protoc --proto_path=$SRC_DIR --go_out=$DST_DIR --go_opt=paths=source_relative  $SRC_DIR/addressbook.proto</code> </p>
@@ -1112,7 +1112,7 @@ origi
 
             
             &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-            <span class="white-color">39.6k</span>
+            <span class="white-color">42.2k</span>
             
 
             <br />
